@@ -1,0 +1,28 @@
+1. SELECT * FROM `employee` WHERE salary LIKE "%0000";
+
+
+2. SELECT * FROM `employee` WHERE occupation LIKE "%d_c%";
+
+
+3. SELECT * FROM `employee` WHERE occupation LIKE "%er%";
+
+
+4. SELECT * FROM `employee` WHERE occupation LIKE "__g%";
+
+
+5. SELECT * FROM `employee` WHERE occupation LIKE "_e_%_%";
+
+
+6. SELECT * FROM `employee` WHERE occupation LIKE "d%r";
+
+
+7. SELECT * FROM `employee` WHERE employee_name LIKE "A_%";
+
+
+8. SELECT * FROM `employee` WHERE employee_name LIKE "A__%" AND salary LIKE '60000';
+
+
+9. SELECT * FROM `employee` WHERE employee_name LIKE "__m_n%" AND salary LIKE '0000';
+
+
+10. SELECT * FROM `employee` WHERE employee_name LIKE "%__r" AND occupation LIKE '%__r';

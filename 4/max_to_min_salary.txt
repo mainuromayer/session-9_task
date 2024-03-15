@@ -1,0 +1,1 @@
+SELECT salary FROM employee WHERE salary BETWEEN (SELECT MIN(salary) FROM employee) AND (SELECT MAX(salary) FROM employee); 

@@ -1,0 +1,95 @@
+=> Create salary history table with salary, worker_id, paid unpaid status and show the total paid amount untill today of every worker with worker name.
+
+
+worker/employee table create:
+-----------------------------
+CREATE TABLE employee(
+	employee_id INT AUTO_INCREMENT PRIMARY KEY,
+	employee_name VARCHAR(50),
+	occupation VARCHAR(50),
+	salary DECIMAL(10, 2),
+	leader_id INT
+);
+
+
+
+worker/employee table data insert:
+----------------------------------
+INSERT INTO employee(employee_id, employee_name, occupation, salary, leader_id) VALUES
+(1, 'Akbar', 'Engineer', 50000, 2),
+(2, 'Minar', 'Singer', 100000, 3),
+(3, 'Dalim', 'Doctor', 100000, 3),
+(4, 'Firoz', 'Doctor', 60000, 3),
+(5, 'Ayman', 'Engineer', 60000, 1),
+(6, 'Nusrat', 'Doctor', 80000, 1),
+(7, 'Minar', 'Doctor', 30000, 4),
+(8, 'Dalim', 'Singer', 60000, 1),
+(9, 'Ayman', 'Singer', 80000, 2),
+(10, 'Nusrat', 'Dancer', 50000, 4),
+(11, 'Minar', 'Engineer', 30000, 4),
+(12, 'Aisha', 'Doctor', 30000, 3),
+(13, 'Aisha', 'Teacher', 40000, 2),
+(14, 'Eliza', 'Engineer', 70000, 1),
+(15, 'Isaac', 'Doctor', 90000, 3),
+(16, 'Amina', 'Singer', 50000, 2),
+(17, 'Olivia', 'Artist', 60000, 4);
+
+
+
+
+salary_history table create:
+----------------------------
+CREATE TABLE salary_history(
+	salary_id INT AUTO_INCREMENT PRIMARY KEY,
+	employee_id INT,
+	salary DECIMAL(10, 2),
+	paid_status ENUM('paid', 'unpaid')
+	FOREIGN KEY(employee_id) REFERENCES employee(employee_id)
+);
+
+
+
+
+
+salary_history table data insert:
+---------------------------------
+INSERT INTO salary_history(salary_id, employee_id, salary, paid_status) VALUES
+(1, 1, 50000, 'paid'),
+(2, 2, 100000, 'paid'),
+(3, 3, 100000, 'unpaid'),
+(4, 4, 60000, 'paid'),
+(5, 5, 60000, 'unpaid'),
+(6, 6, 80000, 'unpaid'),
+(7, 7, 30000, 'unpaid'),
+(8, 8, 60000, 'paid'),
+(9, 9, 80000, 'unpaid'),
+(10, 10, 50000, 'paid'),
+(11, 11, 30000, 'unpaid'),
+(12, 12, 30000, 'unpaid'),
+(13, 13, 40000, 'paid'),
+(14, 14, 70000, 'unpaid'),
+(15, 15, 90000, 'paid'),
+(16, 16, 50000, 'paid'),
+(17, 17, 60000, 'paid');
+
+
+
+
+
+Final Query:
+------------
+SELECT employee.employee_id, 
+       employee.employee_name, 
+       SUM(salary_history.salary) AS total_paid_employee, 
+       salary_history.paid_status
+FROM salary_history
+
+JOIN employee ON salary_history.employee_id = employee.employee_id 
+WHERE salary_history.paid_status = 'paid'
+GROUP BY employee.employee_name;
+
+
+
+
+
+
